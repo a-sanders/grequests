@@ -234,7 +234,7 @@ func buildHTTPRequest(httpMethod, userURL string, ro *RequestOptions) (*http.Req
 }
 
 func createFileUploadRequest(httpMethod, userURL string, ro *RequestOptions) (*http.Request, error) {
-	if httpMethod == "POST" {
+	if httpMethod == "POST" || httpMethod ==  "PUT" {
 		return createMultiPartPostRequest(httpMethod, userURL, ro)
 	}
 
@@ -326,11 +326,6 @@ func createMultiPartPostRequest(httpMethod, userURL string, ro *RequestOptions) 
 		if _, err = io.Copy(writer, f.FileContents); err != nil && err != io.EOF {
 			return nil, err
 		}
-
-		if err := f.FileContents.Close(); err != nil {
-			return nil, err
-		}
-
 	}
 
 	// Populate the other parts of the form (if there are any)
