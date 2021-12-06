@@ -14,7 +14,7 @@ type FileUpload struct {
 	FileName string
 
 	// FileContents is happy as long as you pass it a io.ReadCloser (which most file use anyways)
-	FileContents io.ReadCloser
+	FileContents io.ReadSeekCloser
 
 	// FieldName is form field name
 	FieldName string
